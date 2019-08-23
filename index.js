@@ -5,6 +5,9 @@ var app = express();
 
 // mongoose.connect('mongodb://localhost:27017/nodeapi', {useNewUrlParser: true});
 
+// const Product = mongoose.model('Product');
+
+
 app.use(express.json())
 app.use(express.urlencoded({extended: true}))
 
