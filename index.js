@@ -1,44 +1,25 @@
-var express = require('express');
-var app = express();
+const express = require('express');
+const mongoose = require('mongoose');
+const requireDir = require('require-dir');
 
-// const mongoose = require('mongoose');
+//Starting App
+const app = express();
 
-// mongoose.connect('mongodb://localhost:27017/nodeapi', {useNewUrlParser: true});
+//Starting DB
+mongoose.connect("mongodb://localhost:27017/ppi4-node", {useNewUrlParser: true});
 
-// const Product = mongoose.model('Product');
+requireDir('./src/models');
 
-
-app.use(express.json())
-app.use(express.urlencoded({extended: true}))
-
-app.get('/api/produtos', function (req, res) {
-  let produtos = [];
-  produtos.push({
-    'id': 1,
-    'nome': 'Produto 01'
-  });
-  res.json(produtos);
-});
-
-app.get('/', function (req, res) {
-  res.send('Obtendo produto!');
-});
-
-app.get('/produto/:id', function (req, res) {
-  res.send('Obtendo produto por id! ' + req.params.id);
-});
+const Product = mongoose.model('Product');
 
 
-app.post('/produto', function(req, res){
-  res.send('Adicionando produto');
-});
-
-app.put('/produto', function (req, res) {
-  res.send('Atualizando produto');
-});
-
-app.delete('/produto', function (req, res) {
-  res.send('Deletando um produto');
+//First route
+app.get("/", (req, res) => {
+  Product.create({
+    title: "React Native",
+    description: "Build native apps with React",
+    url: "http://github.com/facebook/react-native"
+  })
 });
 
 

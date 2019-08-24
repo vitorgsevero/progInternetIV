@@ -13,9 +13,18 @@
   "dependencies": {
     "express": "^4.17.1",
     "mongodb": "^3.3.0",
-    "mongoose": "^5.6.10"
+    "mongoose": "^5.6.10",
+    "require-dir": "^1.2.0"
   },
   "devDependencies": {
     "nodemon": "^1.19.1"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vitorgsevero/progInternetIV.git"
+  },
+  "bugs": {
+    "url": "https://github.com/vitorgsevero/progInternetIV/issues"
+  },
+  "homepage": "https://github.com/vitorgsevero/progInternetIV#readme"
 }
