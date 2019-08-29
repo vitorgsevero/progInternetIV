@@ -14,5 +14,5 @@ requireDir('./src/models');
 app.use('/api', require('./src/routes'));
 
 app.listen(3000, function () {
-  console.log('Example app listening on port 3000!');
+  console.log('PPI4 Project app listening on port 3000!');
 });
