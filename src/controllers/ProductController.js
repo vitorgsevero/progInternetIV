@@ -21,10 +21,16 @@ module.exports = {
         return res.json(products);
     },
 
-    async deleteOne(req, res, id){
-        const product = await Product.findById(id);
-        Product.collection.findOneAndDelete(product);
-        res.json(product + "was deleted succesfully!");
+    async deleteOne(req, res){
+        try {
+          const product = await Product.findById(req.params.id);
+          Product.collection.findOneAndDelete(product);
+          res.json(product + " was deleted succesfully!");
+        } catch (error) {
+          let errorMsg = " does not exist!";
+          res.json(req.params.id + errorMsg);
+        }
+       
     }
 
 }
