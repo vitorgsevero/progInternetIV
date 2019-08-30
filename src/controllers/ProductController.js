@@ -10,7 +10,18 @@ module.exports = {
 
     },
 
-    async save(req, res){
+    async getById(req, res){
+        try {
+            const products = await Product.findById(req.params.id);
+            return res.json(products);
+        } catch (error) {
+            let errorMsg = " does not exist!";
+            res.json(req.params.id + errorMsg);
+        }
+       
+    },
+
+    async post(req, res){
         Product.create({
             title: "React Native",
             description: "Build native apps with React",
@@ -31,6 +42,17 @@ module.exports = {
           res.json(req.params.id + errorMsg);
         }
        
+    },
+
+    async updateOne(req, res){
+        try {
+            const product = await Product.findById(req.params.id);
+            Product.collection.findOneAndUpdate(product);
+            res.json(product + " was updated succesfully");
+        } catch (error) {
+            let errorMsg = " does not exist!";
+            res.json(req.params.id + errorMsg);
+        }
     }
 
 }
