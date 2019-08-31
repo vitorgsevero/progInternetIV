@@ -12,8 +12,8 @@ module.exports = {
 
     async getById(req, res){
         try {
-            const products = await Product.findById(req.params.id);
-            return res.json(products);
+            const product = await Product.findById(req.params.id);
+            return res.json(product);
         } catch (error) {
             let errorMsg = " does not exist!";
             res.json(req.params.id + errorMsg);
@@ -21,33 +21,24 @@ module.exports = {
        
     },
 
-    async post(req, res){
-        Product.create({
-            title: "React Native",
-            description: "Build native apps with React",
-            url: "http://github.com/facebook/react-native"
-        });
-
-        const products = await Product.find();
-        return res.json(products);
+    async create(req, res){
+        const product = await Product.create(req.body);
+        return res.json(product);
     },
 
     async deleteOne(req, res){
         try {
-          const product = await Product.findById(req.params.id);
-          Product.collection.findOneAndDelete(product);
+          const product = await Product.findByIdAndRemove(req.params.id);
           res.json(product + " was deleted succesfully!");
         } catch (error) {
           let errorMsg = " does not exist!";
           res.json(req.params.id + errorMsg);
-        }
-       
+        }   
     },
 
     async updateOne(req, res){
         try {
-            const product = await Product.findById(req.params.id);
-            Product.collection.findOneAndUpdate(product);
+            const product = await Product.findByIdAndUpdate(req.params.id, req.body, {new: true});
             res.json(product + " was updated succesfully");
         } catch (error) {
             let errorMsg = " does not exist!";
