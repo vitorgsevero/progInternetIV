@@ -24,7 +24,7 @@ module.exports = {
     async getByUsername(req, res){ 
         try {
             const usernameParams = req.params.username;
-            const user = await User.findOne({"username": new RegExp(usernameParams, 'i')});
+            const user = await User.find({"username": new RegExp(usernameParams, 'i')});
             return res.status(200).json(user);
         } catch (error) {
             let errorMsg = " does not exist!";
