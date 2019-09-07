@@ -1,7 +1,14 @@
+const dotenvsafe = require("dotenv-safe");
+var jwt = require('jsonwebtoken');
+
 const express = require('express');
 const mongoose = require('mongoose');
 const requireDir = require('require-dir');
 const cors = require('cors');
+
+var cookieParser = require('cookie-parser');
+var logger = require('morgan');
+const helmet = require('helmet');
 
 //Starting App
 const app = express();
@@ -17,6 +24,9 @@ mongoose.connect("mongodb://localhost:27017/ppi4-node", {useNewUrlParser: true})
 
 requireDir('./src/models');
 
+ 
+app.use(logger('dev'));
+app.use(helmet());
 
 // Middleware loggedAt
 var loggedAt = function (req, res, next) {

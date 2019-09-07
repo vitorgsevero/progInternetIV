@@ -30,4 +30,10 @@ routes.delete("/users/:id", UserController.deleteOne);
 
 routes.put("/users/:id", UserController.updateOne);
 
+//authentication
+routes.post('/login', (req, res, next) => {
+
+  })
+
+
 module.exports = routes;
