@@ -3,20 +3,21 @@ const mongoose = require('mongoose');
 const User = mongoose.model('User');
 
 module.exports = {
-    async index(req, res) {
+    async index(req, res, next) {
         const { page = 1 } = req.query;
         const users = await User.paginate({}, { page, limit: 10 });
+        next(); // it will call the next middleware
         return res.json(users);
-
     },
 
-    async getById(req, res) {
+    async getById(req, res, next) {
         try {
             const user = await User.findById(req.params.id);
             return res.json(user);
         } catch (error) {
             let errorMsg = " does not exist!";
-            res.json(req.params.id + errorMsg);
+            res.status(404).json(req.params.id + errorMsg);
+            next();
         }
 
     },
@@ -28,7 +29,7 @@ module.exports = {
             return res.status(200).json(user);
         } catch (error) {
             let errorMsg = " does not exist!";
-            res.json(req.params.id + errorMsg);
+            res.status(404).json(req.params.id + errorMsg);
         }
     },
 
@@ -48,7 +49,7 @@ module.exports = {
             res.json(user.username + " was deleted succesfully!");
         } catch (error) {
             let errorMsg = " does not exist!";
-            res.json(req.params.id + errorMsg);
+            res.status(404).json(req.params.id + errorMsg);
         }
     },
 
@@ -58,7 +59,7 @@ module.exports = {
             res.json(req.body.username + " was updated succesfully");
         } catch (error) {
             let errorMsg = " does not exist!";
-            res.json(req.params.id + errorMsg);
+            res.status(404).json(req.params.id + errorMsg);
         }
     }
 

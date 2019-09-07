@@ -3,20 +3,22 @@ const mongoose = require('mongoose');
 const Product = mongoose.model('Product');
 
 module.exports = {
-    async index(req, res) {
+    async index(req, res, next) {
         const { page = 1 } = req.query;
         const products = await Product.paginate({}, { page, limit: 10 });
+        next(); // it will call the next middleware
         return res.json(products);
 
     },
 
-    async getById(req, res) {
+    async getById(req, res, next) {
         try {
             const product = await Product.findById(req.params.id);
             return res.json(product);
         } catch (error) {
             let errorMsg = " does not exist!";
-            res.json(req.params.id + errorMsg);
+            res.status(404).json(req.params.id + errorMsg);
+            next();
         }
 
     },
@@ -37,7 +39,7 @@ module.exports = {
             res.json(product + " was deleted succesfully!");
         } catch (error) {
             let errorMsg = " does not exist!";
-            res.json(req.params.id + errorMsg);
+            res.status(404).json(req.params.id + errorMsg);
         }
     },
 
@@ -47,7 +49,7 @@ module.exports = {
             res.json(product + " was updated succesfully");
         } catch (error) {
             let errorMsg = " does not exist!";
-            res.json(req.params.id + errorMsg);
+            res.status(404).json(req.params.id + errorMsg);
         }
     }
 
