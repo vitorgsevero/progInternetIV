@@ -3,7 +3,7 @@ const routes = express.Router();
 
 const ProductController = require('./controllers/ProductController');
 const UserController = require('./controllers/UserController');
-
+const AuthController = require('./controllers/AuthController');
 
 //Product Routes
 routes.get("/products", ProductController.index);
@@ -31,9 +31,7 @@ routes.delete("/users/:id", UserController.deleteOne);
 routes.put("/users/:id", UserController.updateOne);
 
 //authentication
-routes.post('/login', (req, res, next) => {
-
-  })
+routes.post("/users/login", AuthController.login);
 
 
 module.exports = routes;
