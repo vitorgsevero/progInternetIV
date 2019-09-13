@@ -13,11 +13,11 @@ module.exports = {
 
             const user = await User.findOne({email});
 
-            if(!user) return res.status(400).send({error: 'E-mail not found'});
+            if(!user) return res.status(400).send({error: 'E-mail does not exist!'});
 
-             if(!await bcrypt.compare(password, user.password)) return res.status(400).send({error: 'Invalid password'});
+            if(!await bcrypt.compare(password, user.password)) return res.status(400).send({error: 'Invalid password!'});
 
-            const token = jwt.sign({ id: user.id}, authConfig.secret,{
+            const token = jwt.sign({ id: user.id }, authConfig.secret,{
                 expiresIn: 86400,
             });
 
@@ -26,6 +26,14 @@ module.exports = {
         } catch (error) {
             
         }
+    },
+
+    async tokenVerification(req, res, next){
+        // if () {
+            
+        // } else {
+            
+        // }
     }
 
 }
