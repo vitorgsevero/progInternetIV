@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const User = mongoose.model('User');
 const jwt = require('jsonwebtoken');
+const bcrypt = require('bcrypt');
 
 const authConfig = require('../config/auth');
 
@@ -10,14 +11,11 @@ module.exports = {
         try {
             const { email, password } = req.body;
 
-            const user = await User.findOne({email}).select('+password');
+            const user = await User.findOne({email});
 
             if(!user) return res.status(400).send({error: 'E-mail not found'});
 
-            // if(!user.password === password) return res.status(400).send({error: 'Invalid password'});
-            if(!await bcrypt.compare(password, user.password)) return res.status(400).send({error: 'Invalid password'});
-
-            // user.password = undefined;
+             if(!await bcrypt.compare(password, user.password)) return res.status(400).send({error: 'Invalid password'});
 
             const token = jwt.sign({ id: user.id}, authConfig.secret,{
                 expiresIn: 86400,
