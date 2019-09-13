@@ -11,3 +11,10 @@ This project contains the source code built for Programação para Internet IV p
 * [Paginate](https://www.npmjs.com/package/mongoose-paginate-v2) - A cursor based custom pagination library for Mongoose with customizable labels.
 * [Express](https://expressjs.com/) - fast node.js network app framework, awesome to create routes  
 
+### Tools
+
+* [Visual Studio Code](https://code.visualstudio.com)
+* [MongoDB Compass](https://www.mongodb.com/products/compass)
+* [Postman](https://www.getpostman.com)
+* [Git Bash](https://git-scm.com/downloads)
+* [Github Desktop](https://desktop.github.com)
