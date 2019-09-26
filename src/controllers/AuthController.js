@@ -42,6 +42,7 @@ module.exports = {
             });
 
         } catch (error) {
+            console.log(error)
             res.status(401).send({
                 error: 'Something went wrong, invalid credentials'
             })

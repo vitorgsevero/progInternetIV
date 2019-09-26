@@ -36,7 +36,7 @@ module.exports = {
     async deleteOne(req, res) {
         try {
             const product = await Product.findByIdAndRemove(req.params.id);
-            res.json(product + " was deleted succesfully!");
+            res.json(product.title + " was deleted succesfully!");
         } catch (error) {
             let errorMsg = " does not exist!";
             res.status(404).json(req.params.id + errorMsg);
