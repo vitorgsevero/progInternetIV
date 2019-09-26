@@ -29,7 +29,7 @@ module.exports = {
             return res.json(product);
         } catch (error) {
             let errorMsg = " was not created!";
-            res.json(req.params.id + errorMsg);
+            res.status(404).json(req.params.id + errorMsg);
         }
     },
 

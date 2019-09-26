@@ -4,8 +4,13 @@ const User = mongoose.model('User');
 
 module.exports = {
     async index(req, res, next) {
-        const { page = 1 } = req.query;
-        const users = await User.paginate({}, { page, limit: 10 });
+        const {
+            page = 1
+        } = req.query;
+        const users = await User.paginate({}, {
+            page,
+            limit: 10
+        });
         next(); // it will call the next middleware
         return res.json(users);
     },
@@ -22,10 +27,12 @@ module.exports = {
 
     },
 
-    async getByUsername(req, res){ 
+    async getByUsername(req, res) {
         try {
             const usernameParams = req.params.username;
-            const user = await User.find({"username": new RegExp(usernameParams, 'i')});
+            const user = await User.find({
+                "username": new RegExp(usernameParams, 'i')
+            });
             return res.status(200).json(user);
         } catch (error) {
             let errorMsg = " does not exist!";
@@ -55,7 +62,9 @@ module.exports = {
 
     async updateOne(req, res) {
         try {
-            const user = await User.findByIdAndUpdate(req.params.id, req.body, { new: true });
+            const user = await User.findByIdAndUpdate(req.params.id, req.body, {
+                new: true
+            });
             res.json(req.body.username + " was updated succesfully");
         } catch (error) {
             let errorMsg = " does not exist!";

@@ -5,6 +5,9 @@ const express = require('express');
 const mongoose = require('mongoose');
 const requireDir = require('require-dir');
 const cors = require('cors');
+const fs = require('fs');
+const path = require('path');
+
 
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
@@ -24,9 +27,9 @@ mongoose.connect("mongodb://localhost:27017/ppi4-node", {useNewUrlParser: true})
 
 requireDir('./src/models');
 
- 
-app.use(logger('dev'));
-app.use(helmet());
+//Log File
+var accessLogStream = fs.createWriteStream(path.join(__dirname, 'access.log'), { flags: 'a' })
+app.use(logger('combined', { stream: accessLogStream }))
 
 // Middleware loggedAt
 var loggedAt = function (req, res, next) {
